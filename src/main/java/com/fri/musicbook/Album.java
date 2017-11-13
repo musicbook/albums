@@ -14,7 +14,7 @@ import org.eclipse.persistence.annotations.UuidGenerator;
 public class Album {
     //private String year_of_relese;
     @Column(name = "album_name")
-    private String album_name;
+    private String albumName;
 
     @Column(name="artist_id")
     private Integer artistId;
@@ -35,11 +35,11 @@ public class Album {
     }
 
     public String getAlbumName() {
-        return album_name;
+        return albumName;
     }
 
     public void setAlbumName(String name) {
-        this.album_name = name;
+        this.albumName = name;
     }
 
     public Integer getArtistId() {

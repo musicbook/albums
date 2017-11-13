@@ -16,8 +16,8 @@ import com.fri.musicbook.AlbumsBean;
 import java.util.List;
 
 @ApplicationScoped
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON+ ";charset=utf-8")
+@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/albums")
 public class AlbumResource {
 
@@ -35,8 +35,9 @@ public class AlbumResource {
 
     @POST
     public Response addNewAlbum(Album album) {
-        albumsBean.createAlbum(album);
-        return Response.noContent().build();
+        Album message=albumsBean.createAlbum(album);
+        if(message!=null)  return Response.status(Response.Status.CREATED).entity(album).build();
+        return Response.status(Response.Status.CONFLICT).entity(album).build();
     }
 
     @GET
