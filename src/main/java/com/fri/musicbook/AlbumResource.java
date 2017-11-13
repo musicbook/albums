@@ -1,33 +1,41 @@
 package com.fri.musicbook;
 
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import com.fri.musicbook.*;
 
 import java.util.List;
 
+@ApplicationScoped
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("albums")
+@Path("/albums")
 public class AlbumREST {
+
+    @Inject
+    private AlbumsBean albumsBean;
 
     @GET
     public Response getAllAlbums(){
-        List<Album> albums=AlbumDB.getAlbums();
+        List<Album> albums=albumsBean.getAlbums();
         return Response.ok(albums).build();
     }
 
     @POST
     public Response addNewAlbum(Album album) {
-        AlbumDB.addAlbum(album);
+        albumsBean.createAlbum(album);
         return Response.noContent().build();
     }
 
     @GET
     @Path("/query")
-    public Response getAlbum(@QueryParam("id") String id){
-        Album album=AlbumDB.getByAlbumId(id);
+    public Response getAlbum(@QueryParam("id") Integer id){
+        Album album=albumsBean.getAlbumById(id);
         if(album == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -36,8 +44,8 @@ public class AlbumREST {
 
     @GET
     @Path("/artist/{artist}")
-    public Response getAlbumArtist(@PathParam("artist") String artist){
-        List<Album> album=AlbumDB.getByAlbumArtist(artist);
+    public Response getAlbumArtist(@PathParam("artist") Integer artistId){
+        List<Album> album=albumsBean.getAlbumsByArtist(artistId);
         if(album == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
