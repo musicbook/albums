@@ -5,9 +5,13 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
 import com.fri.musicbook.*;
+import com.fri.musicbook.AlbumsBean;
 
 import java.util.List;
 
@@ -15,7 +19,10 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/albums")
-public class AlbumREST {
+public class AlbumResource {
+
+    @Context
+    protected UriInfo uriInfo;
 
     @Inject
     private AlbumsBean albumsBean;

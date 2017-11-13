@@ -1,36 +1,53 @@
 package com.fri.musicbook;
 
+import javax.persistence.*;
+import org.eclipse.persistence.annotations.UuidGenerator;
 
 
+@Entity(name = "albums")
+@NamedQueries(value =
+        {
+                @NamedQuery(name = "albums.getAll", query = "SELECT o FROM albums o"),
+                @NamedQuery(name = "albums.getAlbumsByArtist", query = "SELECT o FROM albums o WHERE o.artistId = :artistId")
+        })
+@UuidGenerator(name = "idGenerator")
 public class Album {
     //private String year_of_relese;
-    private String name;
-    private String artist;
+    @Column(name = "album_name")
+    private String album_name;
+
+    @Column(name="artist_id")
+    private Integer artistId;
+
     //private String genre;
-    private String id;
+    @Id
+    @Column(name = "album_id")
+    private Integer albumId;
 
-    public String getId() {
-        return id;
+    // Sets/Gets
+
+    public Integer getAlbumId() {
+        return albumId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAlbumId(Integer AlbumId) {
+        this.albumId = AlbumId;
     }
 
-    public String getName() {
-        return name;
+    public String getAlbumName() {
+        return album_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAlbumName(String name) {
+        this.album_name = name;
     }
 
-    public String getArtist() {
-        return artist;
+    public Integer getArtistId() {
+        return artistId;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
+    public void setArtistId(Integer artist) {
+        this.artistId = artist;
     }
 /*
     public int getYear_of_relese(){
