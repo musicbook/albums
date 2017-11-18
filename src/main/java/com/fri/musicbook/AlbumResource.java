@@ -5,15 +5,16 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.*;
 
 import com.fri.musicbook.*;
 import com.fri.musicbook.AlbumsBean;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 @Consumes(MediaType.APPLICATION_JSON+ ";charset=utf-8")
@@ -59,4 +60,32 @@ public class AlbumResource {
         }
         return Response.ok(album).build();
     }
+
+    // http req
+
+    private List<Album> getAlbums(List<Integer> albumIds){
+        Optional<String> albumURL= Optional.of("http://192.168.99.100:1000");
+        Client httpClient = ClientBuilder.newClient();
+        List<Album> albums=new ArrayList<Album>();
+
+        if (albumURL.isPresent()) {
+            for (Integer albumId : albumIds) {
+                try {
+                    albums.add(httpClient
+                            .target(albumURL.get() + "/v1/albums/query?id=" + albumId)
+                            .request().get(new GenericType<Album>() {
+                            })
+                    );
+                } catch (WebApplicationException | ProcessingException e) {
+                    System.out.println(e);
+                    throw new InternalServerErrorException(e);
+                }
+            }
+        } else {
+            return null;
+        }
+        return albums;
+
+    }
+
 }

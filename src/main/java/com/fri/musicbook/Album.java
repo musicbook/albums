@@ -3,6 +3,8 @@ package com.fri.musicbook;
 import javax.persistence.*;
 import org.eclipse.persistence.annotations.UuidGenerator;
 
+import java.util.List;
+
 
 @Entity(name = "albums")
 @NamedQueries(value =
@@ -24,7 +26,14 @@ public class Album {
     @Column(name = "album_id")
     private Integer albumId;
 
+    @Transient
+    private List<Song> songs;
+
     // Sets/Gets
+
+    public List<Song> getSongs() {return songs;}
+
+    public void setSongs(List<Song> songs) {this.songs=songs;}
 
     public Integer getAlbumId() {
         return albumId;
