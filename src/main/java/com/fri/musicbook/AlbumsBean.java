@@ -36,6 +36,8 @@ public class AlbumsBean {
 
     private Optional<String> basePath;
 
+    @Inject
+    private configProperties configProperties;
 
 
     @PostConstruct
@@ -46,14 +48,19 @@ public class AlbumsBean {
     }
 
     public List<Song> getSongsByAlbum(Integer albumId){
-            try{
-                return  httpClient
-                        .target(basePath.get() + "songs?filter=albumId:EQ:" + albumId.toString())
-                        .request().get(new GenericType<List<Song>>() {
-                });}
-                catch (WebApplicationException | ProcessingException e) {
+            if(configProperties.getIsSongsRunning()) {
+                try {
+                    List<Song> songs=httpClient
+                            .target(basePath.get() + "songs?filter=albumId:EQ:" + albumId.toString())
+                            .request().get(new GenericType<List<Song>>() {
+                            });
+                    if (songs.isEmpty()) return null;
+                    else return songs;
+                } catch (WebApplicationException | ProcessingException e) {
                     throw new InternalServerErrorException(e);
                 }
+            }
+            return null;
         }
 
 
@@ -69,6 +76,7 @@ public class AlbumsBean {
     }
 
     public Album getAlbumById(Integer albumId){
+
         Album album=em.find(Album.class,albumId);
         album.setSongs(getSongsByAlbum(albumId));
         return album;
