@@ -52,7 +52,7 @@ public class AlbumsBean {
     }
 
     public List<Song> getSongsByAlbum(Integer albumId){
-            if(configProperties.getIsSongsRunning()) {
+            //if(configProperties.getIsSongsRunning()) {
                 try {
                     List<Song> songs=httpClient
                             .target(basePath + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
@@ -64,8 +64,8 @@ public class AlbumsBean {
                     throw new InternalServerErrorException(e);
                 }
             }
-            return null;
-        }
+          //  return null;
+        //}
 
 
 
