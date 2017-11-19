@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fri.musicbook.Album;
+import com.kumuluz.ee.discovery.annotations.DiscoverService;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.GenericType;
@@ -34,7 +35,11 @@ public class AlbumsBean {
 
     private Client httpClient;
 
-    private Optional<String> basePath;
+    @Inject
+    @DiscoverService("songs-service")
+    private String basePath;
+
+    //private Optional<String> basePath;
 
     @Inject
     private configProperties configProperties;
@@ -44,14 +49,13 @@ public class AlbumsBean {
     private void init() {
         httpClient = ClientBuilder.newClient();
 
-        basePath = Optional.of("http://localhost:8081/v1/");
     }
 
     public List<Song> getSongsByAlbum(Integer albumId){
             if(configProperties.getIsSongsRunning()) {
                 try {
                     List<Song> songs=httpClient
-                            .target(basePath.get() + "songs?filter=albumId:EQ:" + albumId.toString())
+                            .target(basePath + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
                             .request().get(new GenericType<List<Song>>() {
                             });
                     if (songs.isEmpty()) return null;
