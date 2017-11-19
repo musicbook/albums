@@ -61,31 +61,4 @@ public class AlbumResource {
         return Response.ok(album).build();
     }
 
-    // http req
-
-    private List<Album> getAlbums(List<Integer> albumIds){
-        Optional<String> albumURL= Optional.of("http://192.168.99.100:1000");
-        Client httpClient = ClientBuilder.newClient();
-        List<Album> albums=new ArrayList<Album>();
-
-        if (albumURL.isPresent()) {
-            for (Integer albumId : albumIds) {
-                try {
-                    albums.add(httpClient
-                            .target(albumURL.get() + "/v1/albums/query?id=" + albumId)
-                            .request().get(new GenericType<Album>() {
-                            })
-                    );
-                } catch (WebApplicationException | ProcessingException e) {
-                    System.out.println(e);
-                    throw new InternalServerErrorException(e);
-                }
-            }
-        } else {
-            return null;
-        }
-        return albums;
-
-    }
-
 }
