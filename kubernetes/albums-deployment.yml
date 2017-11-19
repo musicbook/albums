@@ -10,7 +10,7 @@ spec:
         app: albums
     spec:
       containers:
-      - image: cleptes/albums:0.01
+      - image: cleptes/albums
         name: albums
         env:
           - name: KUMULUZEE_DISCOVERY_CLUSTER

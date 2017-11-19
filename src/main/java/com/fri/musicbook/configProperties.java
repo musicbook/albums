@@ -5,6 +5,7 @@ import com.kumuluz.ee.configuration.cdi.ConfigValue;
 
 import javax.enterprise.context.ApplicationScoped;
 
+// se ne uporabla
 @ApplicationScoped
 @ConfigBundle("songs-endpoint-config")
 public class configProperties {
