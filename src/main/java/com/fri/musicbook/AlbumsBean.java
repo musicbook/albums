@@ -37,9 +37,10 @@ public class AlbumsBean {
 
     @Inject
     @DiscoverService("songs-service")
-    private String basePath;
+    private Optional<String> basePath;
 
-    //private Optional<String> basePath;
+    //private String basePath;
+
 
     @Inject
     private configProperties configProperties;
@@ -52,10 +53,10 @@ public class AlbumsBean {
     }
 
     public List<Song> getSongsByAlbum(Integer albumId){
-            //if(configProperties.getIsSongsRunning()) {
+            if(basePath.isPresent()) {
                 try {
                     List<Song> songs=httpClient
-                            .target(basePath + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
+                            .target(basePath.get() + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
                             .request().get(new GenericType<List<Song>>() {
                             });
                     if (songs.isEmpty()) return null;
@@ -64,8 +65,8 @@ public class AlbumsBean {
                     throw new InternalServerErrorException(e);
                 }
             }
-          //  return null;
-        //}
+            return null;
+        }
 
 
 

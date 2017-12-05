@@ -12,12 +12,26 @@
     <properties>
         <kumuluzee.version>2.4.1</kumuluzee.version>
         <kumuluzee-config.version>1.0.0</kumuluzee-config.version>
-        <kumuluzee-discovery.version>1.0.0</kumuluzee-discovery.version>
+        <kumuluzee-discovery.version>1.1.0-SNAPSHOT</kumuluzee-discovery.version>
+        <kumuluzee-health.version>1.0.0-SNAPSHOT</kumuluzee-health.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <name>Sonatype Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -73,6 +87,12 @@
           <artifactId>javax.ws.rs-api</artifactId>
           <version>2.0.1</version>
       </dependency>
+      <dependency>
+          <groupId>com.kumuluz.ee.health</groupId>
+          <artifactId>kumuluzee-health</artifactId>
+          <version>${kumuluzee-health.version}</version>
+      </dependency>
+
 
       <dependency>
           <groupId>com.kumuluz.ee.config</groupId>
