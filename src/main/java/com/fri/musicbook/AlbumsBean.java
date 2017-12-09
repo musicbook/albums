@@ -36,7 +36,7 @@ public class AlbumsBean {
     private Client httpClient;
 
     @Inject
-    @DiscoverService("songs-service")
+    @DiscoverService("songs")
     private Optional<String> basePath;
 
     //private String basePath;
