@@ -1,6 +1,7 @@
 package com.fri.musicbook;
 
 import javax.enterprise.context.ApplicationScoped;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,20 +16,17 @@ import javax.ws.rs.core.Response;
 @Path("/tools")
 public class ToolsResource{
 
-    public static boolean health=true;
-
-
     @GET
     @Path("/health_up")
     public Response setHeath(){
-        health=true;
+        Tools.health=true;
         return Response.ok().build();
     }
 
     @GET
     @Path("/health_down")
     public Response clearHeath(){
-        health=false;
+        Tools.health=false;
         return Response.ok().build();
     }
 
