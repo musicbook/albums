@@ -91,7 +91,7 @@
           <groupId>com.kumuluz.ee.health</groupId>
           <artifactId>kumuluzee-health</artifactId>
           <version>${kumuluzee-health.version}</version>
-      </--dependency-->
+      </dependency-->
 
 
       <dependency>
