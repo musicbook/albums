@@ -28,6 +28,7 @@ public class checkIfGetSongs implements HealthCheck {
 
         if(instances.isPresent()){
             if(instances.get().isEmpty()) return HealthCheckResponse.named(checkIfGetSongs.class.getSimpleName()).down().build();
+            System.out.println(instances.get());
             return HealthCheckResponse.named(checkIfGetSongs.class.getSimpleName()).up().build();
         }
         else {
