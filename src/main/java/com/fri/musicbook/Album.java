@@ -14,7 +14,7 @@ import java.util.List;
         })
 @UuidGenerator(name = "idGenerator")
 public class Album {
-    //private String year_of_relese;;
+    //private String year_of_relese;
     @Column(name = "album_name")
     private String albumName;
 
