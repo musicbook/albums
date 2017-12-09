@@ -1,4 +1,4 @@
-package com.fri.musicbook;
+package com.fri.musicbook.health;
 
 import javax.enterprise.context.ApplicationScoped;
 

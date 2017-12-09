@@ -26,7 +26,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.core.GenericType;
 
 
-@ApplicationScoped
+@RequestScoped
 public class AlbumsBean {
     @PersistenceContext(unitName = "albums-jpa")
     private EntityManager em;
