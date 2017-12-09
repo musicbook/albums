@@ -29,5 +29,9 @@ kumuluzee:
         data-source-health-check:
           jndi-name: jdbc/AlbumsDS
 
+
+health-test:
+  am-i-healthy: true
+
 songs-endpoint-config:
   is-songs-running: false

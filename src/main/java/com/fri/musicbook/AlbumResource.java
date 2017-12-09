@@ -22,6 +22,7 @@ import java.util.Optional;
 @Path("/albums")
 public class AlbumResource {
 
+
     @Context
     protected UriInfo uriInfo;
 

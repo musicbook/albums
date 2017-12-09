@@ -8,5 +8,4 @@ import javax.ws.rs.core.Application;
 
 @ApplicationPath("v1")
 public class AlbumApp extends Application {
-
 }
