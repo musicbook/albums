@@ -1,5 +1,5 @@
 kumuluzee:
-  name: albums-service
+  name: albums
   env:
     name: dev
   version: 1.0.0
