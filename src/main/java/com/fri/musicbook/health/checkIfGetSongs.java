@@ -20,14 +20,12 @@ import java.util.Optional;
 public class checkIfGetSongs implements HealthCheck {
 
     @Inject
-    @DiscoverService("songs")
-    private Optional<String> basePath;
+    DiscoveryUtil discoveryUtil;
 
     @Override
     public HealthCheckResponse  call() {
 
-
-
+        Optional<URL> basePath =  discoveryUtil.getServiceInstance("songs","1.0.0","dev");
         if(basePath.isPresent()){
             return HealthCheckResponse.named(checkIfGetSongs.class.getSimpleName()).up().build();
         }
