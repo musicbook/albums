@@ -29,6 +29,9 @@ spec:
         - containerPort: 8080
           name: server
           protocol: TCP
+        resources:
+         limits:
+          cpu: 500m
         #livenessProbe:
          # httpGet:
           #  path: /health
