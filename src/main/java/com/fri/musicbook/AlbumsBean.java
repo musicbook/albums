@@ -42,8 +42,8 @@ public class AlbumsBean {
     //private String basePath;
 
 
-    @Inject
-    private configProperties configProperties;
+   // @Inject
+    //private configProperties configProperties;
 
 
     @PostConstruct

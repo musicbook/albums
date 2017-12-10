@@ -24,10 +24,6 @@ spec:
         - http://etcd:2379
         - --initial-cluster-state
         - new
-        - -cors
-        - "*"
-        - --data-dir
-        - /etcd-data
         image: quay.io/coreos/etcd:latest
         name: etcd
         ports:
@@ -37,12 +33,6 @@ spec:
         - containerPort: 2380
           name: server
           protocol: TCP
-        volumeMounts:
-          - mountPath: /etcd-data
-            name: etcddata
-      volumes:
-        - name: etcddata
-          emptyDir: {}
 
 ---
 
@@ -57,5 +47,9 @@ spec:
     port: 2379
     protocol: TCP
     targetPort: 2379
+  - name: server
+    port: 2380
+    protocol: TCP
+    targetPort: 2380
   selector:
     app: etcd

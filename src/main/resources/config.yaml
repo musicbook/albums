@@ -55,8 +55,4 @@ kumuluzee:
                         </Loggers>
                     </Configuration>'
 
-health-test:
-  am-i-healthy: true
 
-songs-endpoint-config:
-  is-songs-running: false

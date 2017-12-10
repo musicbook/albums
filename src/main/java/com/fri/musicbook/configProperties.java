@@ -6,9 +6,9 @@ import com.kumuluz.ee.configuration.cdi.ConfigValue;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-@ConfigBundle("songs-endpoint-config")
+//@ConfigBundle("songs-endpoint-config")
 public class configProperties {
-    @ConfigValue(watch=true)
+   // @ConfigValue(watch=true)
     private boolean isSongsRunning;
 
     public boolean getIsSongsRunning(){
