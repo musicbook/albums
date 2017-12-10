@@ -14,4 +14,10 @@ public class Tools {
     public Optional<String> getBasePath(){
         return basePath;
     }
+
+    public Integer fibNo(Integer no){
+        if(no==1) return 1;
+        if(no==2) return 1;
+        return fibNo(no-1)+fibNo(no-2);
+    }
 }

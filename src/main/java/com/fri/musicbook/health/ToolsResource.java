@@ -1,11 +1,13 @@
 package com.fri.musicbook.health;
 
+import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
+import org.eclipse.microprofile.metrics.annotation.Metered;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+
 import javax.enterprise.context.ApplicationScoped;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -14,6 +16,8 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/tools")
+@Metered
+@Log(LogParams.METRICS)
 public class ToolsResource{
 
     @GET
@@ -30,6 +34,14 @@ public class ToolsResource{
         return Response.ok().build();
     }
 
+    @GET
+    @Path("/start_load/{no}")
+    @Timed(name="fib")
+    public Response startLoad(@PathParam("no") Integer no){
+        Tools tool=new Tools();
+        return Response.ok(tool.fibNo(no)).build();
+
+    }
 
 }
 

@@ -11,6 +11,9 @@ import javax.ws.rs.core.*;
 
 import com.fri.musicbook.*;
 import com.fri.musicbook.AlbumsBean;
+import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
+import org.eclipse.microprofile.metrics.annotation.Metered;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,8 @@ import java.util.Optional;
 @Consumes(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/albums")
+@Metered(displayName="albums")
+@Log(LogParams.METRICS)
 public class AlbumResource {
 
 
@@ -30,6 +35,7 @@ public class AlbumResource {
     private AlbumsBean albumsBean;
 
     @GET
+    @Log
     public Response getAllAlbums(){
         List<Album> albums=albumsBean.getAlbums();
         return Response.ok(albums).build();

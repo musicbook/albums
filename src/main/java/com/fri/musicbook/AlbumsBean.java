@@ -83,7 +83,7 @@ public class AlbumsBean {
     public Album getAlbumById(Integer albumId){
 
         Album album=em.find(Album.class,albumId);
-        album.setSongs(getSongsByAlbum(albumId));
+        if(album!=null) album.setSongs(getSongsByAlbum(albumId));
         return album;
     }
 
