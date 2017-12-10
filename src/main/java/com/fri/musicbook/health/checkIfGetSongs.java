@@ -18,17 +18,17 @@ import java.util.Optional;
 @Health
 @ApplicationScoped
 public class checkIfGetSongs implements HealthCheck {
+
     @Inject
-    DiscoveryUtil discoveryUtil;
+    @DiscoverService("songs")
+    private Optional<String> basePath;
 
     @Override
     public HealthCheckResponse  call() {
-        Optional<List<URL>> instances = discoveryUtil.getServiceInstances("songs", "*", "*",AccessType.DIRECT);
 
 
-        if(instances.isPresent()){
-            if(instances.get().isEmpty()) return HealthCheckResponse.named(checkIfGetSongs.class.getSimpleName()).down().build();
-            System.out.println(instances.get());
+
+        if(basePath.isPresent()){
             return HealthCheckResponse.named(checkIfGetSongs.class.getSimpleName()).up().build();
         }
         else {
