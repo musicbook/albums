@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
-/*
+
 @Health
 @ApplicationScoped
 public class checkIfGetSongs implements HealthCheck {
@@ -36,4 +36,4 @@ public class checkIfGetSongs implements HealthCheck {
         }
     }
 }
-*/
+
