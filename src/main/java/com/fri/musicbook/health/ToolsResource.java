@@ -1,5 +1,7 @@
 package com.fri.musicbook.health;
 
+import com.kumuluz.ee.logs.LogManager;
+import com.kumuluz.ee.logs.Logger;
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.logs.cdi.LogParams;
 import org.eclipse.microprofile.metrics.annotation.Metered;
@@ -20,6 +22,8 @@ import javax.ws.rs.core.Response;
 @Log(LogParams.METRICS)
 public class ToolsResource{
 
+    private static final Logger LOG = LogManager.getLogger(ToolsResource.class.getName());
+
     @GET
     @Path("/health_up")
     public Response setHeath(){
@@ -39,6 +43,7 @@ public class ToolsResource{
     @Timed(name="fib")
     public Response startLoad(@PathParam("no") Integer no){
         Tools tool=new Tools();
+        LOG.info("Starting fibload with "+no);
         return Response.ok(tool.fibNo(no)).build();
 
     }
