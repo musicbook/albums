@@ -24,7 +24,7 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/albums")
 @Metered(displayName="albums")
-@Log(LogParams.METRICS)
+@Log
 public class AlbumResource {
 
 
@@ -35,7 +35,6 @@ public class AlbumResource {
     private AlbumsBean albumsBean;
 
     @GET
-    @Log
     public Response getAllAlbums(){
         List<Album> albums=albumsBean.getAlbums();
         return Response.ok(albums).build();
