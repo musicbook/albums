@@ -51,6 +51,8 @@ public class InfoResource {
         travis.add("https://travis-ci.org/musicbook/albums");
         travis.add("https://travis-ci.org/musicbook/songs");
 
+        travis.add("https://travis-ci.org/musicbook/artist");
+        travis.add("https://travis-ci.org/musicbook/genre");
 
 
         dockerhub.add("https://hub.docker.com/r/cleptes/albums/");
