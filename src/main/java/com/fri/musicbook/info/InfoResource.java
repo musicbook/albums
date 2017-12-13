@@ -35,6 +35,7 @@ public class InfoResource {
         mikrostoritve.add("http://169.51.16.117:31896/v1/albums");
         mikrostoritve.add("http://169.51.16.117:32280/v1/songs");
 
+        mikrostoritve.add("http://169.51.16.117:32664/v1/genres");
         mikrostoritve.add("http://169.51.16.117:30370/v1/artists");
 
 
