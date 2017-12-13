@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/tools")
 @Metered
-@Log(LogParams.METRICS)
+@Log
 public class ToolsResource{
 
     private static final Logger LOG = LogManager.getLogger(ToolsResource.class.getName());

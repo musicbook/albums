@@ -35,17 +35,29 @@ public class InfoResource {
         mikrostoritve.add("http://169.51.16.117:31896/v1/albums");
         mikrostoritve.add("http://169.51.16.117:32280/v1/songs");
 
+        mikrostoritve.add("http://169.51.16.117:30370/v1/artists");
+
+
+
         github.add("https://github.com/musicbook/albums");
         github.add("https://github.com/musicbook/songs");
 
         github.add("https://github.com/musicbook/artist");
         github.add("https://github.com/musicbook/genre");
 
+
+
         travis.add("https://travis-ci.org/musicbook/albums");
         travis.add("https://travis-ci.org/musicbook/songs");
 
+
+
         dockerhub.add("https://hub.docker.com/r/cleptes/albums/");
         dockerhub.add("https://hub.docker.com/r/cleptes/songs/");
+
+        dockerhub.add("https://hub.docker.com/r/blajan/artists-api/");
+        dockerhub.add("https://hub.docker.com/r/blajan/genres-api/");
+
 
         Entity entity=new Entity(opis_projekta,mikrostoritve,github,dockerhub,travis,clani);
 
