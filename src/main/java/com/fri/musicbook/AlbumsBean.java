@@ -35,14 +35,13 @@ public class AlbumsBean {
 
     private Client httpClient;
 
-    @Inject
-    @DiscoverService("songs-service")
-    private String basePath;
+
 
     //private Optional<String> basePath;
 
     @Inject
-    private configProperties configProperties;
+    private configProperties ConfigProperties;
+
 
 
     @PostConstruct
@@ -52,7 +51,8 @@ public class AlbumsBean {
     }
 
     public List<Song> getSongsByAlbum(Integer albumId){
-            if(configProperties.getIsSongsRunning()) {
+            if(ConfigProperties.getIsSongsRunning()) {
+                String basePath="http://localhost:8081";
                 try {
                     List<Song> songs=httpClient
                             .target(basePath + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
@@ -63,6 +63,8 @@ public class AlbumsBean {
                 } catch (WebApplicationException | ProcessingException e) {
                     throw new InternalServerErrorException(e);
                 }
+            }else{
+                System.out.println("Songs is not running");
             }
             return null;
         }
