@@ -15,7 +15,7 @@ kumuluzee:
       ping-interval: 5
 
   server:
-    base-url: http://localhost:8080
+    base-url: http://192.168.99.100:8080
     http:
       port: 8080
   datasources:
@@ -54,5 +54,8 @@ kumuluzee:
                             </Root>
                         </Loggers>
                     </Configuration>'
+
+songs-endpoint-config:
+  is-songs-running: true
 
 

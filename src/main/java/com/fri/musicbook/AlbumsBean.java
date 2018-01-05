@@ -42,8 +42,8 @@ public class AlbumsBean {
     //private String basePath;
 
 
-   // @Inject
-    //private configProperties configProperties;
+    @Inject
+    private configProperties configProperties;
 
 
     @PostConstruct
@@ -53,16 +53,19 @@ public class AlbumsBean {
     }
 
     public List<Song> getSongsByAlbum(Integer albumId){
-            if(basePath.isPresent()) {
-                try {
-                    List<Song> songs=httpClient
-                            .target(basePath.get() + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
-                            .request().get(new GenericType<List<Song>>() {
-                            });
-                    if (songs.isEmpty()) return null;
-                    else return songs;
-                } catch (WebApplicationException | ProcessingException e) {
-                    throw new InternalServerErrorException(e);
+            if(configProperties.getIsSongsRunning()) {
+                if (basePath.isPresent()) {
+                    System.out.println(basePath.get());
+                    try {
+                        List<Song> songs = httpClient
+                                .target(basePath.get() + "/v1/songs?filter=albumId:EQ:" + albumId.toString())
+                                .request().get(new GenericType<List<Song>>() {
+                                });
+                        if (songs.isEmpty()) return null;
+                        else return songs;
+                    } catch (WebApplicationException | ProcessingException e) {
+                        throw new InternalServerErrorException(e);
+                    }
                 }
             }
             return null;
