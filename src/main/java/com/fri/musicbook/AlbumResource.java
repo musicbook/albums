@@ -44,7 +44,7 @@ public class AlbumResource {
     public Response addNewAlbum(Album album) {
         Album message=albumsBean.createAlbum(album);
         if(message!=null)  return Response.status(Response.Status.CREATED).entity(album).build();
-        return Response.status(Response.Status.CONFLICT).entity(album).build();
+        return Response.status(Response.Status.CONFLICT).build();
     }
 
     @GET
@@ -65,6 +65,15 @@ public class AlbumResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok(album).build();
+    }
+
+    @DELETE
+    @Path("albumId/{albumId}")
+    public Response deleteAlbum(@PathParam("albumId") Integer albumId){
+        if(albumsBean.deleteAlbum(albumId)){
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.CONFLICT).build();
     }
 
 }

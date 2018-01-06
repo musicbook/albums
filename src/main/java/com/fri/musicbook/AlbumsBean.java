@@ -90,7 +90,12 @@ public class AlbumsBean {
         return album;
     }
 
-    public Album createAlbum(Album album){
+    public Album createAlbum(Album album) {
+        if (album.getAlbumId() == null) {
+            album.setAlbumId(getAlbums().size()+1); // album id se zacne pri 1
+        }else{
+            if(getAlbumById(album.getAlbumId())!=null) return null;
+        }
         try {
             beginTx();
             em.persist(album);
@@ -99,7 +104,6 @@ public class AlbumsBean {
             rollbackTx();
             return null;
         }
-
         return album;
     }
 
