@@ -21,12 +21,16 @@ import java.util.Optional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fri.musicbook.Album;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
+import com.kumuluz.ee.fault.tolerance.annotations.GroupKey;
+import org.eclipse.microprofile.faulttolerance.*;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.GenericType;
 
 
 @RequestScoped
+@Bulkhead
+@GroupKey("AlbumsBean")
 public class AlbumsBean {
     @PersistenceContext(unitName = "albums-jpa")
     private EntityManager em;
@@ -52,6 +56,14 @@ public class AlbumsBean {
 
     }
 
+    private List<Song> songsMSFallback(){
+        return new ArrayList<>();
+    }
+
+    @CircuitBreaker
+    @Timeout
+    @Retry
+    @Fallback(fallbackMethod = "songsMSFallback")
     public List<Song> getSongsByAlbum(Integer albumId){
             if(configProperties.getIsSongsRunning()) {
                 if (basePath.isPresent()) {
@@ -64,13 +76,12 @@ public class AlbumsBean {
                         if (songs.isEmpty()) return null;
                         else return songs;
                     } catch (WebApplicationException | ProcessingException e) {
-                        throw new InternalServerErrorException(e);
+                        return null;
                     }
                 }
             }
             return null;
         }
-
 
 
     public List<Album> getAlbums(){
