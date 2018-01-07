@@ -25,7 +25,7 @@ public class checkIfGetSongs implements HealthCheck {
     @Override
     public HealthCheckResponse  call() {
 
-        Optional<URL> basePath =  discoveryUtil.getServiceInstance("songs","1.0.0","dev");
+        Optional<URL> basePath =  discoveryUtil.getServiceInstance("songs","*","dev");
         if(basePath.isPresent()){
             return HealthCheckResponse.named(checkIfGetSongs.class.getSimpleName()).up().build();
         }
